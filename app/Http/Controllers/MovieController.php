@@ -26,8 +26,11 @@ class MovieController extends Controller
             ->select('movies.id', 'movies.movie_name', 'movies.movie_description', 'genres.genre_name')
             ->orderBy('movies.movie_name')
             ->get();
+        // $movies = Movie::all()->with('genre')->get();
+        // dd($movies);
         // $movies = Movie::where('id', 1)->with('genre')->get();
         // dd($movies);
+
         return view('movies.index', compact('movies'));
     }
 
@@ -56,6 +59,7 @@ class MovieController extends Controller
             'movie_name' => $request->movie_name,
             'movie_description' => $request->movie_description
         ])->genre()->attach("$request->genre_id");
+        // ->attach(["$request->genre_id", ""]);
         return redirect()->back();
     }
 
