@@ -37,6 +37,12 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">name</label>
                 <input type="text" name="movie_name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$movie->movie_name}}">
+                @error('name')
+                <div style="color:red;">
+                  {{$message}}
+                 </div>
+              @enderror
+
             </div>
 
             {{-- <div class="mb-3">
@@ -48,6 +54,7 @@
                 </select>
                 </div> --}}
 
+
                  @foreach ($genres as $genre)
                  <div class="form-check">
                     <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
@@ -58,6 +65,12 @@
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                 <textarea class="form-control" name="movie_description" id="exampleFormControlTextarea1" rows="3">{{$movie->movie_description}}</textarea>
+                @error('movie_description')
+                <div style="color:red;">
+                  {{$message}}
+                 </div>
+              @enderror
+
             </div>
 
 

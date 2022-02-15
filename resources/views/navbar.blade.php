@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{URL::to('/movies')}}">
+        <a class="navbar-brand" href="{{route('movies.index')}}">
             <img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png" alt="Netflix logo" width="30" height="24" class="d-inline-block align-text-top">
             Netflix
           </a>
@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{URL::to('/movies')}}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{route('movies.index')}}">Home</a>
           </li>
           {{-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -20,7 +20,7 @@
               movies
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{{URL::to('/movies/create')}}">Add a movie</a></li>
+              <li><a class="dropdown-item" href="{{route('movies.create')}}">Add a movie</a></li>
               {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
@@ -32,8 +32,8 @@
               categories
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-              <li><a class="dropdown-item" href="{{URL::to('/movies/create')}}">View categories</a></li>
-              <li><a class="dropdown-item" href="{{URL::to('/movies/create')}}">Add a category</a></li>
+              <li><a class="dropdown-item" href="{{route('movies.create')}}">View categories</a></li>
+              <li><a class="dropdown-item" href="{{route('movies.create')}}">Add a category</a></li>
             </ul>
           </li>
         </ul>

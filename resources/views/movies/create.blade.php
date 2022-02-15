@@ -30,7 +30,13 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">name</label>
                 <input type="text" name="movie_name" class="form-control" id="exampleFormControlInput1" placeholder="">
+                @error('name')
+                   <div style="color:red;">
+                     {{$message}}
+                    </div>
+                 @enderror
             </div>
+
 
             {{-- <div class="mb-3">
                 <label for="status" class="form-label">status</label>
@@ -51,6 +57,12 @@
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                 <textarea class="form-control" name="movie_description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                @error('movie_description')
+                <div style="color:red;">
+                  {{$message}}
+                 </div>
+              @enderror
+
             </div>
 
 

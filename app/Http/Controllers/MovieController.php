@@ -81,6 +81,10 @@ class MovieController extends Controller
         // }
 
         // // dd($genres);
+        $request->validate([
+            'name' => 'required|max:255',
+            'movie_description' => 'required|max:255',
+        ]);
         Movie::create([
             'movie_name' => $request->movie_name,
             'movie_description' => $request->movie_description
@@ -134,7 +138,10 @@ class MovieController extends Controller
 
         // foreach ($movie->genres as $genre)
         //     $genre->genres()->updateExistingPivot($user, array('status' => 1), false);
-
+        $request->validate([
+            'name' => 'required|max:255',
+            'movie_description' => 'required|max:255',
+        ]);
         $movie->update([
             'movie_name' => $request->movie_name,
             'movie_description' => $request->movie_description

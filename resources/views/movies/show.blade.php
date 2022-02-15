@@ -36,17 +36,17 @@
                     @endforeach
                 </td>
                 <td>
-                    <form action="{{route('movies.edit', $movie->id)}}" method="POST">
+                    <form action="{{route('movies.edit', $movie)}}" method="POST">
                         @csrf
-                        @method('put')
+                        @method('get')
                         <input type="submit" value="Edit" class="btn btn-success"/>
                     </form>
                 </td>
                 <td>
-                    <form action="{{route('movies.destroy', $movie->id)}}" method="post">
+                    <form action="{{route('movies.destroy', $movie)}}" method="post">
                         @csrf
                         @method('delete')
-                        <input type="submit" value="Delete" class="btn btn-danger"/>
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure?')"/>
                     </form>
                 </td>
               </tr>
