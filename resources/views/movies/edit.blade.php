@@ -14,7 +14,7 @@
 
 
     <div class="container">
-        <h1>create a movie!</h1>
+        <h1>edit a movie!</h1>
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -25,11 +25,18 @@
         </div>
     @endif
 
-        <form action="{{route('movies.store')}}" method="POST" id="myForm" onsubmit="return checkboxesChecked(event)">
+
+    @if (session('message'))
+    <div class="alert alert-success">
+        {{session('message')}}
+    </div>
+   @endif
+        <form action="{{route('movies.update', $movie)}}" method="POST" id="myForm" onsubmit="return checkboxesChecked(event)">
 @csrf
+@method('put')
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">name</label>
-                <input type="text" name="movie_name" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input type="text" name="movie_name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$movie->movie_name}}">
             </div>
 
             {{-- <div class="mb-3">
@@ -41,7 +48,7 @@
                 </select>
                 </div> --}}
 
-                 @foreach ($genres as $genre )
+                 @foreach ($genres as $genre)
                  <div class="form-check">
                     <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
                     <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}">
@@ -50,7 +57,7 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" name="movie_description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="movie_description" id="exampleFormControlTextarea1" rows="3">{{$movie->movie_description}}</textarea>
             </div>
 
 

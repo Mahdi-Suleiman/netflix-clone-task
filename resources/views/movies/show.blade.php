@@ -19,8 +19,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
-            <th scope="col">Genre 1</th>
-            {{-- <th scope="col">Genre 2</th> --}}
+            <th scope="col">Genres</th>
             <th scope="col">edit</th>
             <th scope="col">delete</th>
           </tr>
@@ -30,8 +29,12 @@
                 <th scope="row">{{$movie->id}}</th>
                 <td>{{$movie->movie_name}}</td>
                 <td>{{$movie->movie_description}}</td>
-                <td>{{$movie->genre_name}}</td>
-                {{-- <td>{{$movie->genre_name}}</td> --}}
+                <td>
+                    @foreach ($movie->genres as $genre)
+                        {{$genre->genre_name}}
+                        <br/>
+                    @endforeach
+                </td>
                 <td>
                     <form action="{{route('movies.edit', $movie->id)}}" method="POST">
                         @csrf

@@ -19,8 +19,8 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
-            <th scope="col">Genre 1</th>
-            <th scope="col">Genre 2</th>
+            <th scope="col">Genres</th>
+            {{-- <th scope="col">Genre 2</th> --}}
             <th scope="col">show</th>
             <th scope="col">edit</th>
             <th scope="col">delete</th>
@@ -36,7 +36,7 @@
             </tr>
             @endforeach --}}
 
-            @for ($i=0; $i < count($movies); $i++)
+            {{-- @for ($i=0; $i < count($movies); $i++)
              <tr>
                 <th scope="row">{{$movies[$i]->id}}</th>
                 @if ( $i != count($movies)-1 && $movies[$i]->movie_name == $movies[$i+1]->movie_name)
@@ -45,7 +45,6 @@
                 <td>{{$movies[$i]->genre_name}}</td>
                 <td>{{$movies[$i+1]->genre_name}}</td>
                 <div style="display: none;">
-                    {{-- increment i without printing it --}}
                     {{$i++}}
                   </div>
                 @else
@@ -71,13 +70,52 @@
                     <form action="{{route('movies.destroy', $movies[$i]->id)}}" method="post">
                         @csrf
                         @method('delete')
-                        <input type="submit" value="Delete" class="btn btn-danger"/>
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure?')"/>
                     </form>
                 </td>
               </tr>
+            @endfor --}}
 
-
-            @endfor
+            @foreach ($movies as $movie)
+            <tr>
+                <th scope="row">{{$movie->id}}</th>
+                {{-- @if ( $i != count($movies)-1 && $movies[$i]->movie_name == $movies[$i+1]->movie_name) --}}
+                <td>{{$movie->movie_name}}</td>
+                <td>{{$movie->movie_description}}</td>
+                <td>
+                    @foreach ($movie->genres as $genre)
+                        {{$genre->genre_name}}
+                        <br/>
+                    @endforeach
+                </td>
+                {{-- @else --}}
+                {{-- <td>{{$movies[$i]->movie_name}}</td>
+                <td>{{$movies[$i]->movie_description}}</td>
+                <td>{{$movies[$i]->genre_name}}</td>
+                <td></td> --}}
+                {{-- @endif --}}
+                <td>
+                    <form action="{{route('movies.show', $movie)}}" method="GET">
+                        @csrf
+                        <input type="submit" value="Show" class="btn btn-primary"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{route('movies.edit', $movie)}}" method="POST">
+                        @csrf
+                        @method('get')
+                        <input type="submit" value="Edit" class="btn btn-success"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{route('movies.destroy', $movie)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure?')"/>
+                    </form>
+                </td>
+              </tr>
+            @endforeach
 
         </tbody>
       </table>

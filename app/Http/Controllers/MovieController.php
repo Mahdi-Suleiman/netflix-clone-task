@@ -26,11 +26,26 @@ class MovieController extends Controller
             ->select('movies.id', 'movies.movie_name', 'movies.movie_description', 'genres.genre_name')
             ->orderBy('movies.movie_name')
             ->get();
+
+
+
+        // $movie = Movie::find(1);
+
+        // dd($movie->genres);
+        // $movie = Movie::where('id', 1)->with('genres')->get();
+        // dd($movie);
         // $movies = Movie::all()->with('genre')->get();
         // dd($movies);
         // $movies = Movie::where('id', 1)->with('genre')->get();
         // dd($movies);
+        // with -> get
+        // attach -> store and update
 
+        // dd($movies[1]->genres);
+        // foreach ($movies[1]->genres as $genre) {
+        //     echo $genre->genre_name;
+        // }
+        $movies = Movie::all();
         return view('movies.index', compact('movies'));
     }
 
@@ -55,10 +70,21 @@ class MovieController extends Controller
     public function store(StoreMovieRequest $request)
     {
         //
+        // // dd($request->genre_id);
+        // // dd($request->genre_id);
+        // // dd([$request->genre_id[0]]);
+        // $genres = array();
+        // foreach ($request->genre_id as $id) {
+        //     # code...
+        //     echo $id;
+        //     array_push($genres, $id);
+        // }
+
+        // // dd($genres);
         Movie::create([
             'movie_name' => $request->movie_name,
             'movie_description' => $request->movie_description
-        ])->genre()->attach("$request->genre_id");
+        ])->genres()->sync($request->genre_id);
         // ->attach(["$request->genre_id", ""]);
         return redirect()->back();
     }
@@ -84,6 +110,8 @@ class MovieController extends Controller
     public function edit(Movie $movie)
     {
         //
+        $genres = Genre::all();
+        return view('movies.edit', compact('movie', 'genres'));
     }
 
     /**
@@ -96,6 +124,24 @@ class MovieController extends Controller
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
         //
+        // $movie->update([
+        //     'movie_name' => $request->movie_name,
+        //     'movie_description' => $request->movie_description
+        // ])->genres()->updateExistingPivot($request->genre_id);
+        // $movie = Movie::find($movie->id);
+        // $movie->genres()->sync($request->genre_id);
+        // dd($movie->genres);
+
+        // foreach ($movie->genres as $genre)
+        //     $genre->genres()->updateExistingPivot($user, array('status' => 1), false);
+
+        $movie->update([
+            'movie_name' => $request->movie_name,
+            'movie_description' => $request->movie_description
+        ]);
+        $movie->genres()->sync($request->genre_id);
+        // dd($movie->genres);
+        return redirect()->back()->with(['message' => 'edit was successful']);
     }
 
     /**
