@@ -37,7 +37,7 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">name</label>
                 <input type="text" name="movie_name" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$movie->movie_name}}">
-                @error('name')
+                @error('movie_name')
                 <div style="color:red;">
                   {{$message}}
                  </div>
@@ -45,21 +45,32 @@
 
             </div>
 
-            {{-- <div class="mb-3">
-                <label for="status" class="form-label">status</label>
-                <select class="form-select" aria-label="Default select example" name="genre_id">
-                    @foreach ($genres as $genre )
-                    <option value="{{$genre->id}}">{{$genre->genre_name}}</option>
-                    @endforeach
-                </select>
-                </div> --}}
+                @foreach ($genres as $genre)
+                    @php
+                        $found = false;
+                    @endphp
+                        @foreach ($movie->genres as $movie_genre )
+                            @if ($genre->id == $movie_genre->id)
+                            <div class="form-check">
+                                <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
+                                <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}" checked>
+                            </div>
+                                @php
+                                    $found = true;
+                                    break;
+                                @endphp
+                            @endif
+                            @endforeach
 
-
-                 @foreach ($genres as $genre)
-                 <div class="form-check">
-                    <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
-                    <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}">
-                </div>
+                            @php
+                                if ($found) {
+                                    continue;
+                                }
+                            @endphp
+                    <div class="form-check">
+                        <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
+                        <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$movie_genre->id}}">
+                    </div>
                 @endforeach
 
             <div class="mb-3">
