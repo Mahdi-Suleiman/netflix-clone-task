@@ -69,7 +69,7 @@
                             @endphp
                     <div class="form-check">
                         <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
-                        <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$movie_genre->id}}">
+                        <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}">
                     </div>
                 @endforeach
 
