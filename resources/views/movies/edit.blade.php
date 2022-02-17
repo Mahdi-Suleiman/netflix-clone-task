@@ -45,7 +45,7 @@
 
             </div>
 
-                @foreach ($genres as $genre)
+                {{-- @foreach ($genres as $genre)
                     @php
                         $found = false;
                     @endphp
@@ -71,8 +71,15 @@
                         <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
                         <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}">
                     </div>
-                @endforeach
+                @endforeach --}}
+                 @foreach ($genres as $genre)
+                 <div class="form-check">
+                    <label class="form-check-label" for="flexCheckDefault{{$genre->id}}"> {{$genre->genre_name}}</label>
+                    <input class="form-check-input checkboxes" type="checkbox" name="genre_id[]" value="{{$genre->id}}" id="flexCheckDefault{{$genre->id}}" {{$movie_genre->contains($genre->id)? 'checked':'' }}>
+                </div>
 
+                {{-- {{dd($movie_genre->contains($genre->id))}} --}}
+@endforeach
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                 <textarea class="form-control" name="movie_description" id="exampleFormControlTextarea1" rows="3">{{$movie->movie_description}}</textarea>

@@ -115,7 +115,9 @@ class MovieController extends Controller
     {
         //
         $genres = Genre::all();
-        return view('movies.edit', compact('movie', 'genres'));
+        $movie_genre = $movie->genres()->pluck('genre_id');
+        // dd($movie_genre);
+        return view('movies.edit', compact('movie', 'genres', 'movie_genre'));
     }
 
     /**

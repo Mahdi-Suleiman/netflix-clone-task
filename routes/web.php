@@ -19,3 +19,7 @@ Route::get('/', function () {
 });
 
 Route::resource('movies', MovieController::class);
+
+// route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
+//     Route::resource('movies', MovieController::class);
+// });
